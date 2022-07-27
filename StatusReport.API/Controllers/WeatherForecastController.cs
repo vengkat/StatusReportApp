@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StatusReport.API.Models;
 
 namespace StatusReport.API.Controllers
 {

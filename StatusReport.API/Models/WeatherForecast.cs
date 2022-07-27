@@ -1,4 +1,4 @@
-namespace StatusReport.Web
+namespace StatusReport.API.Models
 {
     public class WeatherForecast
     {
