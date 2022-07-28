@@ -30,7 +30,8 @@ namespace StatusReport.API.Services
         public async Task AddAsync(T item)
         {
             dynamic obj = item;
-            await _container.CreateItemAsync(item, new PartitionKey(obj.id));
+            var id = obj.id;
+            await _container.CreateItemAsync(item, new PartitionKey(id));
         }
         #endregion
 
@@ -56,7 +57,8 @@ namespace StatusReport.API.Services
         {
             try
             {
-                var response = await _container.ReadItemAsync<T>(id, PartitionKey.None);
+                //dynamic obj = (T)Activator.CreateInstance(typeof(T));
+                var response = await _container.ReadItemAsync<T>(id, new PartitionKey(id));
                 return response.Resource;
             }
             catch (CosmosException Ex) //For handling item not found and other exceptions
@@ -83,7 +85,7 @@ namespace StatusReport.API.Services
                 results.AddRange(response.ToList());
             }
 
-            return null;
+            return (IEnumerable<T>)results;
         }
         #endregion
 

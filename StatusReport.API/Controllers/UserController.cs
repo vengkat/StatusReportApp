@@ -30,7 +30,7 @@ namespace StatusReport.API.Controllers
         [HttpPost]
         public async Task<IActionResult> AddNewUser([FromBody] User item)
         {
-            item.id = Guid.NewGuid().ToString();
+            //item.id = Guid.NewGuid().ToString();
             await _cosmosDbService.AddAsync(item);
             return CreatedAtAction(nameof(Get), new { id = item.id }, item);
         }
